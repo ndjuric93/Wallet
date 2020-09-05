@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+    networks:
+    - small_network
+  wallet:
+    image: wallet
+    ports:
+    - 5000:5000
+    depends_on:
+    - db
+    networks:
+    - small_network
+networks:
+  small_network:
+    ipam:
+      driver: default
